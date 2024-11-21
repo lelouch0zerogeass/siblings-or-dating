@@ -21,43 +21,16 @@ function updateDisplay() {
     const siblingsPercentage = ((guesses.siblings / totalGuesses) * 100).toFixed(2);
     const datingPercentage = ((guesses.dating / totalGuesses) * 100).toFixed(2);
 
-    gameContainer.innerHTML = `
+    const percentagesHTML = `
         <div class="percentage">
             <p>Siblings: ${siblingsPercentage}%</p>
             <p>Dating: ${datingPercentage}%</p>
         </div>
     `;
+    gameContainer.innerHTML += percentagesHTML;
 }
 
 function loadNextImage() {
     if (currentImageIndex < images.length) {
         const image = images[currentImageIndex];
         gameContainer.innerHTML = `
-            <div class="image-container">
-                <img src="${image.src}" alt="Image">
-                <div class="overlay-text" id="correct-answer"></div>
-            </div>
-            <button onclick="checkAnswer('siblings')">Siblings</button>
-            <button onclick="checkAnswer('dating')">Dating</button>
-        `;
-    } else {
-        gameContainer.innerHTML = '<h2>Game Over! Thanks for playing.</h2>';
-    }
-}
-
-function checkAnswer(answer) {
-    const correctAnswer = images[currentImageIndex].answer;
-    guesses[answer]++;
-    updateDisplay();
-
-    const correctAnswerElement = document.getElementById('correct-answer');
-    correctAnswerElement.textContent = correctAnswer.toUpperCase();
-    correctAnswerElement.style.display = 'block';
-
-    setTimeout(() => {
-        currentImageIndex++;
-        loadNextImage();
-    }, 3000); // Delay to show percentages and correct answer before moving to the next image
-}
-
-loadNextImage();
