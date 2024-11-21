@@ -1,8 +1,8 @@
 const gameContainer = document.getElementById('game-container');
 
 const images = [
-    { src: 'image1.png', answer: 'siblings' },
-    { src: 'image2.png', answer: 'siblings' },
+    { src: 'image1.jpg', answer: 'siblings' },
+    { src: 'image2.jpg', answer: 'dating' },
     // Add more images here
 ];
 
@@ -14,6 +14,8 @@ function shuffleArray(array) {
 }
 
 let currentImageIndex = 0;
+let siblingsCount = 0;
+let datingCount = 0;
 
 function loadNextImage() {
     if (currentImageIndex < images.length) {
@@ -30,15 +32,33 @@ function loadNextImage() {
 
 function checkAnswer(answer) {
     const correctAnswer = images[currentImageIndex].answer;
-    if (answer === correctAnswer) {
-        alert('Correct!');
+    if (answer === 'siblings') {
+        siblingsCount++;
     } else {
-        alert('Wrong! Try again.');
+        datingCount++;
     }
-    currentImageIndex++;
-    loadNextImage();
+
+    const totalGuesses = siblingsCount + datingCount;
+    const siblingsPercentage = ((siblingsCount / totalGuesses) * 100).toFixed(2);
+    const datingPercentage = ((datingCount / totalGuesses) * 100).toFixed(2);
+
+    gameContainer.innerHTML += `
+        <div>
+            <p>Siblings: ${siblingsPercentage}%</p>
+            <p>Dating: ${datingPercentage}%</p>
+        </div>
+    `;
+
+    setTimeout(() => {
+        if (answer === correctAnswer) {
+            alert('Correct!');
+        } else {
+            alert('Wrong! Try again.');
+        }
+        currentImageIndex++;
+        loadNextImage();
+    }, 2000); // Delay to show percentages before moving to the next image
 }
 
 shuffleArray(images);
 loadNextImage();
-
