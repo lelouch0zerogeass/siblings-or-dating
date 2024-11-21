@@ -36,7 +36,7 @@ img {
     width: 100%;
     max-width: 100%;
     height: auto; /* Maintain aspect ratio */
-    max-height: calc(100vh - 200px); /* Adjust height to fit within viewport */
+    max-height: calc(100vh - 400px); /* Adjust height to fit within viewport, 400px for buttons and margins */
     border-radius: 10px;
     margin: 10px 0;
     object-fit: contain; /* Ensure image scales properly */
@@ -56,7 +56,17 @@ img {
     border-radius: 5px;
 }
 
+.button-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 10px;
+    flex-wrap: wrap; /* Ensure buttons wrap to fit within the screen */
+}
+
 button {
+    flex: 1 1 auto;
     padding: 10px 20px;
     margin: 5px;
     background-color: #007bff;
@@ -65,8 +75,9 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    font-size: calc(1vw + 1vh + 1vmin); /* Responsive font size */
+    font-size: calc(0.8vw + 0.8vh + 0.8vmin); /* Responsive font size */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    min-width: 45%; /* Ensure buttons fit side-by-side on small screens */
 }
 
 button:hover {
