@@ -1,3 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e3f2fd; /* Lighter blue background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+}
+
+#title-container {
+    margin-bottom: 20px;
+}
+
+#game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px; /* Maximum width for larger screens */
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
 .image-container {
     position: relative;
     width: 100%;
@@ -25,4 +54,36 @@ img {
     background: rgba(255, 255, 255, 0.8); /* Background for better readability */
     padding: 10px;
     border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: calc(1vw + 1vh + 1vmin); /* Responsive font size */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+p {
+    margin: 5px;
+}
+
+h1, h2 {
+    color: #333;
+    margin-top: 20px;
+}
+
+.percentage {
+    font-size: calc(1vw + 1vh + 1vmin); /* Responsive font size */
+    color: #333;
+    margin-top: 10px;
 }
