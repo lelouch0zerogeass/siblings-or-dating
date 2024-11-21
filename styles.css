@@ -68,7 +68,7 @@ h2 {
 }
 
 .percentage {
-    font-size: 18px;
+    font-size: calc(1vw + 1vh + 1vmin); /* Responsive font size */
     color: #333;
     margin-top: 10px;
 }
