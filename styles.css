@@ -27,6 +27,10 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.image-container {
+    position: relative;
+}
+
 img {
     width: 100%;
     max-width: 100%;
@@ -35,6 +39,17 @@ img {
     border-radius: 10px;
     margin: 10px 0;
     object-fit: contain; /* Ensure image scales properly */
+}
+
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ff5722; /* Bright color for the correct answer */
+    font-size: 2rem;
+    font-weight: bold;
+    display: none;
 }
 
 button {
@@ -46,6 +61,8 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: calc(1vw + 1vh + 1vmin); /* Responsive font size */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 button:hover {
@@ -56,15 +73,9 @@ p {
     margin: 5px;
 }
 
-h2 {
+h1, h2 {
+    color: #333;
     margin-top: 20px;
-}
-
-.correct-answer {
-    font-size: 24px;
-    font-weight: bold;
-    color: #ff5722; /* Bright color for the correct answer */
-    margin-top: 10px;
 }
 
 .percentage {
