@@ -30,7 +30,7 @@ body {
 img {
     width: 100%;
     max-width: 100%;
-    height: auto;
+    height: auto; /* Maintain aspect ratio */
     border-radius: 10px;
     margin: 10px 0;
 }
