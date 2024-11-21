@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const gameContainer = document.getElementById('game-container');
-    let guesses = { siblings: 0, dating: 0 };
+    let guesses = JSON.parse(localStorage.getItem('guesses')) || { siblings: 0, dating: 0 }; // Load from local storage or initialize
     const images = [
         { src: 'image1.png', answer: 'siblings' },
         { src: 'image2.png', answer: 'siblings' },
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     shuffleArray(images);
-    let currentImageIndex = 0;
+    let currentImageIndex = parseInt(localStorage.getItem('currentImageIndex')) || 0; // Load from local storage or initialize
 
     // Display the chart with percentages
     function showChart() {
@@ -59,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         nextButton.textContent = 'Next Image';
         nextButton.onclick = () => {
             currentImageIndex++;
+            localStorage.setItem('currentImageIndex', currentImageIndex); // Save to local storage
             loadNextImage();
         };
         gameContainer.appendChild(nextButton);
@@ -80,12 +81,16 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         } else {
             gameContainer.innerHTML = '<h2>Game Over! Thanks for playing.</h2>';
+            localStorage.removeItem('currentImageIndex'); // Clear index after the game ends
+            localStorage.removeItem('guesses'); // Clear guesses after the game ends
         }
     }
 
     window.checkAnswer = function (answer) {
         const correctAnswer = images[currentImageIndex].answer;
         guesses[answer]++;
+        localStorage.setItem('guesses', JSON.stringify(guesses)); // Save to local storage
+
         const correctAnswerElement = document.getElementById('correct-answer');
         correctAnswerElement.textContent = correctAnswer.toUpperCase();
         correctAnswerElement.style.display = 'block';
