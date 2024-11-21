@@ -73,8 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     <img src="${image.src}" alt="Image">
                     <div class="overlay-text" id="correct-answer"></div>
                 </div>
-                <button onclick="checkAnswer('siblings')">Siblings</button>
-                <button onclick="checkAnswer('dating')">Dating</button>
+                <div class="button-container">
+                    <button onclick="checkAnswer('siblings')">Siblings</button>
+                    <button onclick="checkAnswer('dating')">Dating</button>
+                </div>
             `;
         } else {
             gameContainer.innerHTML = '<h2>Game Over! Thanks for playing.</h2>';
