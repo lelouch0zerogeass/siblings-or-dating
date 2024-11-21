@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add more images here
     ];
 
+    // Shuffle images to ensure a random order
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     shuffleArray(images);
     let currentImageIndex = 0;
 
+    // Display the chart with percentages
     function showChart() {
         const totalGuesses = guesses.siblings + guesses.dating;
         const siblingsPercentage = ((guesses.siblings / totalGuesses) * 100).toFixed(2);
@@ -57,25 +59,26 @@ document.addEventListener('DOMContentLoaded', () => {
         nextButton.textContent = 'Next Image';
         nextButton.onclick = () => {
             currentImageIndex++;
-            loadNextImage();
+            if (currentImageIndex < images.length) {
+                loadNextImage();
+            } else {
+                gameContainer.innerHTML = '<h2>Game Over! Thanks for playing.</h2>';
+            }
         };
         gameContainer.appendChild(nextButton);
     }
 
+    // Load the next image in the sequence
     function loadNextImage() {
-        if (currentImageIndex < images.length) {
-            const image = images[currentImageIndex];
-            gameContainer.innerHTML = `
-                <div class="image-container">
-                    <img src="${image.src}" alt="Image">
-                    <div class="overlay-text" id="correct-answer"></div>
-                </div>
-                <button onclick="checkAnswer('siblings')">Siblings</button>
-                <button onclick="checkAnswer('dating')">Dating</button>
-            `;
-        } else {
-            gameContainer.innerHTML = '<h2>Game Over! Thanks for playing.</h2>';
-        }
+        const image = images[currentImageIndex];
+        gameContainer.innerHTML = `
+            <div class="image-container">
+                <img src="${image.src}" alt="Image">
+                <div class="overlay-text" id="correct-answer"></div>
+            </div>
+            <button onclick="checkAnswer('siblings')">Siblings</button>
+            <button onclick="checkAnswer('dating')">Dating</button>
+        `;
     }
 
     window.checkAnswer = function (answer) {
