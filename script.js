@@ -50,11 +50,7 @@ function checkAnswer(answer) {
     `;
 
     setTimeout(() => {
-        if (answer === correctAnswer) {
-            alert('Correct!');
-        } else {
-            alert('Wrong! Try again.');
-        }
+        alert(`The correct answer was: ${correctAnswer}`);
         currentImageIndex++;
         loadNextImage();
     }, 2000); // Delay to show percentages before moving to the next image
