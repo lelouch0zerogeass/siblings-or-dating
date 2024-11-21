@@ -1,5 +1,5 @@
 const gameContainer = document.getElementById('game-container');
-
+let guesses = { siblings: 0, dating: 0 };
 const images = [
     { src: 'image1.png', answer: 'siblings' },
     { src: 'image2.png', answer: 'siblings' },
@@ -13,15 +13,30 @@ function shuffleArray(array) {
     }
 }
 
+shuffleArray(images);
 let currentImageIndex = 0;
-let siblingsCount = 0;
-let datingCount = 0;
+
+function updateDisplay() {
+    const totalGuesses = guesses.siblings + guesses.dating;
+    const siblingsPercentage = ((guesses.siblings / totalGuesses) * 100).toFixed(2);
+    const datingPercentage = ((guesses.dating / totalGuesses) * 100).toFixed(2);
+
+    gameContainer.innerHTML = `
+        <div class="percentage">
+            <p>Siblings: ${siblingsPercentage}%</p>
+            <p>Dating: ${datingPercentage}%</p>
+        </div>
+    `;
+}
 
 function loadNextImage() {
     if (currentImageIndex < images.length) {
         const image = images[currentImageIndex];
         gameContainer.innerHTML = `
-            <img src="${image.src}" alt="Image">
+            <div class="image-container">
+                <img src="${image.src}" alt="Image">
+                <div class="overlay-text" id="correct-answer"></div>
+            </div>
             <button onclick="checkAnswer('siblings')">Siblings</button>
             <button onclick="checkAnswer('dating')">Dating</button>
         `;
@@ -32,25 +47,12 @@ function loadNextImage() {
 
 function checkAnswer(answer) {
     const correctAnswer = images[currentImageIndex].answer;
-    if (answer === 'siblings') {
-        siblingsCount++;
-    } else {
-        datingCount++;
-    }
+    guesses[answer]++;
+    updateDisplay();
 
-    const totalGuesses = siblingsCount + datingCount;
-    const siblingsPercentage = ((siblingsCount / totalGuesses) * 100).toFixed(2);
-    const datingPercentage = ((datingCount / totalGuesses) * 100).toFixed(2);
-
-    gameContainer.innerHTML += `
-        <div class="percentage">
-            <p>Siblings: ${siblingsPercentage}%</p>
-            <p>Dating: ${datingPercentage}%</p>
-        </div>
-        <div class="correct-answer">
-            <p>${correctAnswer.toUpperCase()}</p>
-        </div>
-    `;
+    const correctAnswerElement = document.getElementById('correct-answer');
+    correctAnswerElement.textContent = correctAnswer.toUpperCase();
+    correctAnswerElement.style.display = 'block';
 
     setTimeout(() => {
         currentImageIndex++;
@@ -58,5 +60,4 @@ function checkAnswer(answer) {
     }, 3000); // Delay to show percentages and correct answer before moving to the next image
 }
 
-shuffleArray(images);
 loadNextImage();
