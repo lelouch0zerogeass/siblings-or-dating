@@ -22,13 +22,37 @@ document.addEventListener('DOMContentLoaded', () => {
         const siblingsPercentage = ((guesses.siblings / totalGuesses) * 100).toFixed(2);
         const datingPercentage = ((guesses.dating / totalGuesses) * 100).toFixed(2);
 
-        const percentagesHTML = `
-            <div class="percentage">
-                <p>Siblings: ${siblingsPercentage}%</p>
-                <p>Dating: ${datingPercentage}%</p>
-            </div>
-        `;
-        gameContainer.innerHTML += percentagesHTML;
+        const chartCanvas = document.createElement('canvas');
+        chartCanvas.id = 'guessChart';
+        chartCanvas.width = 400;
+        chartCanvas.height = 200;
+        gameContainer.appendChild(chartCanvas);
+
+        new Chart(chartCanvas, {
+            type: 'bar',
+            data: {
+                labels: ['Siblings', 'Dating'],
+                datasets: [{
+                    label: 'Percentage of Guesses',
+                    data: [siblingsPercentage, datingPercentage],
+                    backgroundColor: ['#ff5722', '#4caf50'],
+                    borderColor: ['#ff5722', '#4caf50'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        const nextButton = document.createElement('button');
+        nextButton.textContent = 'Next Image';
+        nextButton.onclick = loadNextImage;
+        gameContainer.appendChild(nextButton);
     }
 
     function loadNextImage() {
@@ -50,16 +74,11 @@ document.addEventListener('DOMContentLoaded', () => {
     window.checkAnswer = function (answer) {
         const correctAnswer = images[currentImageIndex].answer;
         guesses[answer]++;
-        updateDisplay();
-
         const correctAnswerElement = document.getElementById('correct-answer');
         correctAnswerElement.textContent = correctAnswer.toUpperCase();
         correctAnswerElement.style.display = 'block';
 
-        setTimeout(() => {
-            currentImageIndex++;
-            loadNextImage();
-        }, 3000); // Delay to show percentages and correct answer before moving to the next image
+        updateDisplay();
     }
 
     loadNextImage();
