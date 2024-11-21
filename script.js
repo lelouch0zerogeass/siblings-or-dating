@@ -22,11 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const siblingsPercentage = ((guesses.siblings / totalGuesses) * 100).toFixed(2);
         const datingPercentage = ((guesses.dating / totalGuesses) * 100).toFixed(2);
 
+        const chartContainer = document.createElement('div');
+        chartContainer.id = 'chart-container';
+        gameContainer.appendChild(chartContainer);
+
         const chartCanvas = document.createElement('canvas');
         chartCanvas.id = 'guessChart';
-        chartCanvas.width = 400;
-        chartCanvas.height = 200;
-        gameContainer.appendChild(chartCanvas);
+        chartContainer.appendChild(chartCanvas);
 
         new Chart(chartCanvas, {
             type: 'bar',
@@ -52,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const nextButton = document.createElement('button');
         nextButton.textContent = 'Next Image';
         nextButton.onclick = loadNextImage;
-        gameContainer.appendChild(nextButton);
+        chartContainer.appendChild(nextButton);
     }
 
     function loadNextImage() {
