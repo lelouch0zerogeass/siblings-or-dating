@@ -59,26 +59,26 @@ document.addEventListener('DOMContentLoaded', () => {
         nextButton.textContent = 'Next Image';
         nextButton.onclick = () => {
             currentImageIndex++;
-            if (currentImageIndex < images.length) {
-                loadNextImage();
-            } else {
-                gameContainer.innerHTML = '<h2>Game Over! Thanks for playing.</h2>';
-            }
+            loadNextImage();
         };
         gameContainer.appendChild(nextButton);
     }
 
     // Load the next image in the sequence
     function loadNextImage() {
-        const image = images[currentImageIndex];
-        gameContainer.innerHTML = `
-            <div class="image-container">
-                <img src="${image.src}" alt="Image">
-                <div class="overlay-text" id="correct-answer"></div>
-            </div>
-            <button onclick="checkAnswer('siblings')">Siblings</button>
-            <button onclick="checkAnswer('dating')">Dating</button>
-        `;
+        if (currentImageIndex < images.length) {
+            const image = images[currentImageIndex];
+            gameContainer.innerHTML = `
+                <div class="image-container">
+                    <img src="${image.src}" alt="Image">
+                    <div class="overlay-text" id="correct-answer"></div>
+                </div>
+                <button onclick="checkAnswer('siblings')">Siblings</button>
+                <button onclick="checkAnswer('dating')">Dating</button>
+            `;
+        } else {
+            gameContainer.innerHTML = '<h2>Game Over! Thanks for playing.</h2>';
+        }
     }
 
     window.checkAnswer = function (answer) {
