@@ -55,7 +55,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const nextButton = document.createElement('button');
         nextButton.textContent = 'Next Image';
-        nextButton.onclick = loadNextImage;
+        nextButton.onclick = () => {
+            currentImageIndex++;
+            loadNextImage();
+        };
         gameContainer.appendChild(nextButton);
     }
 
