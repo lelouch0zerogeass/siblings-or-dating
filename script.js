@@ -43,17 +43,19 @@ function checkAnswer(answer) {
     const datingPercentage = ((datingCount / totalGuesses) * 100).toFixed(2);
 
     gameContainer.innerHTML += `
-        <div>
+        <div class="percentage">
             <p>Siblings: ${siblingsPercentage}%</p>
             <p>Dating: ${datingPercentage}%</p>
+        </div>
+        <div class="correct-answer">
+            <p>${correctAnswer.toUpperCase()}</p>
         </div>
     `;
 
     setTimeout(() => {
-        alert(`The correct answer was: ${correctAnswer}`);
         currentImageIndex++;
         loadNextImage();
-    }, 2000); // Delay to show percentages before moving to the next image
+    }, 3000); // Delay to show percentages and correct answer before moving to the next image
 }
 
 shuffleArray(images);
