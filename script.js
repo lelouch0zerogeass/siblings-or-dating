@@ -17,10 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
     shuffleArray(images);
     let currentImageIndex = 0;
 
-    function updateDisplay() {
+    function showChart() {
         const totalGuesses = guesses.siblings + guesses.dating;
         const siblingsPercentage = ((guesses.siblings / totalGuesses) * 100).toFixed(2);
         const datingPercentage = ((guesses.dating / totalGuesses) * 100).toFixed(2);
+
+        gameContainer.innerHTML = '';
 
         const chartContainer = document.createElement('div');
         chartContainer.id = 'chart-container';
@@ -80,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         correctAnswerElement.textContent = correctAnswer.toUpperCase();
         correctAnswerElement.style.display = 'block';
 
-        updateDisplay();
+        setTimeout(showChart, 2000); // Delay to show correct answer on image before displaying chart
     }
 
     loadNextImage();
