@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #e3f2fd; /* Lighter blue background */
     margin: 0;
     padding: 0;
     display: flex;
@@ -45,6 +45,7 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -57,4 +58,17 @@ p {
 
 h2 {
     margin-top: 20px;
+}
+
+.correct-answer {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff5722; /* Bright color for the correct answer */
+    margin-top: 10px;
+}
+
+.percentage {
+    font-size: 18px;
+    color: #333;
+    margin-top: 10px;
 }
