@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let guesses = JSON.parse(localStorage.getItem('guesses')) || { siblings: 0, dating: 0 }; // Load from local storage or initialize
     const images = [
         { src: 'image1.png', answer: 'siblings' },
-        { src: 'image2.png', answer: 'siblings' },
+        { src: 'image2.png', answer: 'dating' },
         // Add more images here
     ];
 
@@ -59,8 +59,14 @@ document.addEventListener('DOMContentLoaded', () => {
         nextButton.textContent = 'Next Image';
         nextButton.onclick = () => {
             currentImageIndex++;
-            localStorage.setItem('currentImageIndex', currentImageIndex); // Save to local storage
-            loadNextImage();
+            if (currentImageIndex < images.length) {
+                localStorage.setItem('currentImageIndex', currentImageIndex); // Save to local storage
+                loadNextImage();
+            } else {
+                localStorage.removeItem('currentImageIndex'); // Clear index after the game ends
+                localStorage.removeItem('guesses'); // Clear guesses after the game ends
+                gameContainer.innerHTML = '<h2>Game Over! Thanks for playing.</h2>';
+            }
         };
         gameContainer.appendChild(nextButton);
     }
@@ -76,13 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="button-container">
                     <button onclick="checkAnswer('siblings')">Siblings</button>
-                    <button onclick="checkAnswer('dating')">Dating</button>
+                    <button onclick="checkAnswer('siblings')">Dating</button>
                 </div>
             `;
         } else {
             gameContainer.innerHTML = '<h2>Game Over! Thanks for playing.</h2>';
-            localStorage.removeItem('currentImageIndex'); // Clear index after the game ends
-            localStorage.removeItem('guesses'); // Clear guesses after the game ends
         }
     }
 
