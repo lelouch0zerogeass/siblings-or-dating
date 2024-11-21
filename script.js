@@ -1,8 +1,8 @@
 const gameContainer = document.getElementById('game-container');
 
 const images = [
-    { src: 'image1.jpg', answer: 'siblings' },
-    { src: 'image2.jpg', answer: 'dating' },
+    { src: 'image1.png', answer: 'siblings' },
+    { src: 'image2.png', answer: 'siblings' },
     // Add more images here
 ];
 
