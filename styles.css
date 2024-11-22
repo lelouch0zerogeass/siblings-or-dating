@@ -34,9 +34,9 @@ body {
 
 img {
     width: 100%;
-    max-width: 100%;
     height: auto; /* Maintain aspect ratio */
-    max-height: calc(100vh - 400px); /* Adjust height to fit within viewport, 400px for buttons and margins */
+    max-width: 100%; /* Ensure it doesn't overflow horizontally */
+    max-height: 70vh; /* Ensure it doesn't overflow vertically */
     border-radius: 10px;
     margin: 10px 0;
     object-fit: contain; /* Ensure image scales properly */
