@@ -56,6 +56,32 @@ img {
     border-radius: 5px;
 }
 
+.overlay-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+}
+
+.bar-segment {
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: white;
+    font-size: 1rem;
+    border-radius: 0 0 5px 5px;
+}
+
+.bar-segment.siblings {
+    background-color: #ff5722;
+}
+
+.bar-segment.dating {
+    background-color: #4caf50;
+}
+
 .button-container {
     display: flex;
     justify-content: space-around;
@@ -91,24 +117,4 @@ p {
 h1, h2 {
     color: #333;
     margin-top: 20px;
-}
-
-.progress-bar-container {
-    width: 100%;
-    max-width: 600px;
-    margin-top: 20px;
-}
-
-.progress-bar {
-    height: 30px;
-    background-color: #ff5722;
-    color: white;
-    text-align: center;
-    line-height: 30px; /* Center text vertically */
-    border-radius: 5px;
-    margin: 10px 0;
-}
-
-.progress-bar.dating {
-    background-color: #4caf50;
 }
