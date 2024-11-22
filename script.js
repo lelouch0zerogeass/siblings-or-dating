@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         storedGuesses[answer]++;
         storeGuesses(imageKey, storedGuesses);
 
-        setTimeout(() => showProgressBarAndAnswer(imageKey, correctAnswer), 2000);
+        showProgressBarAndAnswer(imageKey, correctAnswer);
     };
 
     loadNextImage();
