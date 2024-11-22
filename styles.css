@@ -33,10 +33,10 @@ body {
 }
 
 img {
-    width: 100%;
-    height: auto; /* Maintain aspect ratio */
-    max-width: 100%; /* Ensure it doesn't overflow horizontally */
-    max-height: 70vh; /* Ensure it doesn't overflow vertically */
+    width: auto;
+    height: 70vh; /* Make it as tall as possible without overflowing */
+    max-width: 100%; /* Make sure it doesn't overflow horizontally */
+    max-height: 100vh; /* Ensure it doesn't overflow vertically */
     border-radius: 10px;
     margin: 10px 0;
     object-fit: contain; /* Ensure image scales properly */
