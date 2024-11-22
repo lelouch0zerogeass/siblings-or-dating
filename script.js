@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const nextButton = document.createElement('button');
         nextButton.textContent = 'Next Image';
+        nextButton.classList.add('next-button');
         nextButton.onclick = () => {
             currentImageIndex++;
             loadNextImage();
