@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="button-container">
                     <button onclick="checkAnswer('siblings')">Siblings</button>
-                    <button onclick="checkAnswer('siblings')">Dating</button>
+                    <button onclick="checkAnswer('dating')">Dating</button>
                 </div>
             `;
         } else {
