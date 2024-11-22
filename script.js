@@ -16,12 +16,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     shuffleArray(images);
     let currentImageIndex = 0;
-    let currentGuesses = { siblings: 0, dating: 0 }; // Guesses for current image
 
-    function showProgressBars() {
-        const totalGuesses = currentGuesses.siblings + currentGuesses.dating;
-        const siblingsPercentage = ((currentGuesses.siblings / totalGuesses) * 100).toFixed(2);
-        const datingPercentage = ((currentGuesses.dating / totalGuesses) * 100).toFixed(2);
+    function getStoredGuesses(imageKey) {
+        return JSON.parse(localStorage.getItem(imageKey)) || { siblings: 0, dating: 0 };
+    }
+
+    function storeGuesses(imageKey, guesses) {
+        localStorage.setItem(imageKey, JSON.stringify(guesses));
+    }
+
+    function showProgressBars(imageKey) {
+        const storedGuesses = getStoredGuesses(imageKey);
+        const totalGuesses = storedGuesses.siblings + storedGuesses.dating;
+        const siblingsPercentage = ((storedGuesses.siblings / totalGuesses) * 100).toFixed(2);
+        const datingPercentage = ((storedGuesses.dating / totalGuesses) * 100).toFixed(2);
 
         gameContainer.innerHTML = `
             <div class="progress-bar-container">
@@ -38,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
         nextButton.textContent = 'Next Image';
         nextButton.onclick = () => {
             currentImageIndex++;
-            currentGuesses = { siblings: 0, dating: 0 }; // Reset guesses for next image
             loadNextImage();
         };
         gameContainer.appendChild(nextButton);
@@ -47,14 +54,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadNextImage() {
         if (currentImageIndex < images.length) {
             const image = images[currentImageIndex];
+            const imageKey = image.src.replace('.png', '');
             gameContainer.innerHTML = `
                 <div class="image-container">
                     <img src="${image.src}" alt="Image">
                     <div class="overlay-text" id="correct-answer"></div>
                 </div>
                 <div class="button-container">
-                    <button onclick="checkAnswer('siblings')">Siblings</button>
-                    <button onclick="checkAnswer('dating')">Dating</button>
+                    <button onclick="checkAnswer('${imageKey}', 'siblings')">Siblings</button>
+                    <button onclick="checkAnswer('${imageKey}', 'dating')">Dating</button>
                 </div>
             `;
         } else {
@@ -62,14 +70,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    window.checkAnswer = function (answer) {
+    window.checkAnswer = function (imageKey, answer) {
         const correctAnswer = images[currentImageIndex].answer;
-        currentGuesses[answer]++;
+        const storedGuesses = getStoredGuesses(imageKey);
+        storedGuesses[answer]++;
+        storeGuesses(imageKey, storedGuesses);
+
         const correctAnswerElement = document.getElementById('correct-answer');
         correctAnswerElement.textContent = correctAnswer.toUpperCase();
         correctAnswerElement.style.display = 'block';
 
-        setTimeout(showProgressBars, 2000);
+        setTimeout(() => showProgressBars(imageKey), 2000);
     };
 
     loadNextImage();
