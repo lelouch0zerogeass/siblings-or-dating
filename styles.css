@@ -1,7 +1,7 @@
 /* Universal styles */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f0f4f8;
+    background-color: #f5f5f5; /* Light Gray for background */
     margin: 0;
     padding: 0;
     display: flex;
@@ -13,7 +13,7 @@ body {
 
 /* Header and footer */
 header, footer {
-    background-color: #007bff;
+    background-color: #0056b3; /* Dark Blue for header and footer */
     color: white;
     text-align: center;
     padding: 10px 0;
@@ -37,6 +37,7 @@ main {
 
 h1 {
     font-size: 2.5rem;
+    color: #ff8c00; /* Dark Orange for title */
 }
 
 /* Game container */
@@ -83,7 +84,7 @@ img {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #ff5722;
+    color: #e67e22; /* Tomato color for overlay text */
     font-size: 1.5rem;
     font-weight: bold;
     display: none;
@@ -113,11 +114,11 @@ img {
 }
 
 .bar-segment.siblings {
-    background-color: #007bff; /* Blue */
+    background-color: #007bff; /* Blue for siblings */
 }
 
 .bar-segment.dating {
-    background-color: #ff5722; /* Orange */
+    background-color: #ff5722; /* Orange for dating */
 }
 
 /* Buttons */
@@ -132,7 +133,7 @@ button {
     flex-grow: 1;
     padding: 15px;
     margin: 10px;
-    background-color: #007bff;
+    background-color: #0064ce; /* Lighter Blue for buttons */
     color: white;
     border: none;
     border-radius: 5px;
@@ -143,7 +144,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #004ba0; /* Darker Blue for button hover */
 }
 
 button:disabled {
