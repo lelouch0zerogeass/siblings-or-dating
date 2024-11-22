@@ -35,7 +35,7 @@ body {
 img {
     width: auto;
     height: 70vh; /* Make it as tall as possible without overflowing */
-    max-width: 100%; /* Make sure it doesn't overflow horizontally */
+    max-width: 100%; /* Ensure it doesn't overflow horizontally */
     max-height: 100vh; /* Ensure it doesn't overflow vertically */
     border-radius: 10px;
     margin: 10px 0;
