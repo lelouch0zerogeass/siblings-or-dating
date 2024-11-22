@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let guesses = JSON.parse(localStorage.getItem('guesses')) || { siblings: 0, dating: 0 }; // Load from local storage or initialize
     const images = [
         { src: 'image1.png', answer: 'siblings' },
-        { src: 'image2.png', answer: 'dating' },
+        { src: 'image2.png', answer: 'siblings' },
         // Add more images here
     ];
 
