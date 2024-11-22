@@ -25,11 +25,15 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem(imageKey, JSON.stringify(guesses));
     }
 
-    function showProgressBar(imageKey) {
+    function showProgressBarAndAnswer(imageKey, correctAnswer) {
         const storedGuesses = getStoredGuesses(imageKey);
         const totalGuesses = storedGuesses.siblings + storedGuesses.dating;
         const siblingsPercentage = (totalGuesses === 0) ? 0 : ((storedGuesses.siblings / totalGuesses) * 100).toFixed(2);
         const datingPercentage = (totalGuesses === 0) ? 0 : ((storedGuesses.dating / totalGuesses) * 100).toFixed(2);
+
+        const correctAnswerElement = document.getElementById('correct-answer');
+        correctAnswerElement.textContent = correctAnswer.toUpperCase();
+        correctAnswerElement.style.display = 'block';
 
         const progressBar = document.createElement('div');
         progressBar.classList.add('overlay-bar');
@@ -38,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="bar-segment dating" style="width: ${datingPercentage}%;">Dating: ${datingPercentage}%</div>
         `;
 
-        gameContainer.appendChild(progressBar);
+        correctAnswerElement.after(progressBar);
 
         const nextButton = document.createElement('button');
         nextButton.textContent = 'Next Image';
@@ -74,11 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         storedGuesses[answer]++;
         storeGuesses(imageKey, storedGuesses);
 
-        const correctAnswerElement = document.getElementById('correct-answer');
-        correctAnswerElement.textContent = correctAnswer.toUpperCase();
-        correctAnswerElement.style.display = 'block';
-
-        setTimeout(() => showProgressBar(imageKey), 2000);
+        setTimeout(() => showProgressBarAndAnswer(imageKey, correctAnswer), 2000);
     };
 
     loadNextImage();
