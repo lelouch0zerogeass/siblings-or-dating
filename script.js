@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const datingPercentage = (totalGuesses === 0) ? 0 : ((storedGuesses.dating / totalGuesses) * 100).toFixed(2);
 
         const correctAnswerElement = document.getElementById('correct-answer');
-        correctAnswerElement.textContent = `${correctAnswer.toUpperCase()} (Based on previous users' guesses)`;
+        correctAnswerElement.textContent = correctAnswer.toUpperCase();
         correctAnswerElement.style.display = 'block';
 
         const progressBar = document.createElement('div');
