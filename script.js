@@ -1,13 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     const gameContainer = document.getElementById('game-container');
-    let guesses = JSON.parse(localStorage.getItem('guesses')) || { siblings: 0, dating: 0 }; // Load from local storage or initialize
+    let guesses = JSON.parse(localStorage.getItem('guesses')) || { siblings: 0, dating: 0 };
     const images = [
         { src: 'siblings1.png', answer: 'siblings' },
         { src: 'siblings2.png', answer: 'siblings' },
         // Add more images here
     ];
 
-    // Shuffle images to ensure a random order
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -16,9 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     shuffleArray(images);
-    let currentImageIndex = parseInt(localStorage.getItem('currentImageIndex')) || 0; // Load from local storage or initialize
+    let currentImageIndex = parseInt(localStorage.getItem('currentImageIndex')) || 0;
 
-    // Display progress bars with percentages
     function showProgressBars() {
         const totalGuesses = guesses.siblings + guesses.dating;
         const siblingsPercentage = ((guesses.siblings / totalGuesses) * 100).toFixed(2);
@@ -40,18 +38,17 @@ document.addEventListener('DOMContentLoaded', () => {
         nextButton.onclick = () => {
             currentImageIndex++;
             if (currentImageIndex < images.length) {
-                localStorage.setItem('currentImageIndex', currentImageIndex); // Save to local storage
+                localStorage.setItem('currentImageIndex', currentImageIndex);
                 loadNextImage();
             } else {
-                localStorage.removeItem('currentImageIndex'); // Clear index after the game ends
-                localStorage.removeItem('guesses'); // Clear guesses after the game ends
+                localStorage.removeItem('currentImageIndex');
+                localStorage.removeItem('guesses');
                 gameContainer.innerHTML = '<h2>Game Over! Thanks for playing.</h2>';
             }
         };
         gameContainer.appendChild(nextButton);
     }
 
-    // Load the next image in the sequence
     function loadNextImage() {
         if (currentImageIndex < images.length) {
             const image = images[currentImageIndex];
@@ -73,14 +70,14 @@ document.addEventListener('DOMContentLoaded', () => {
     window.checkAnswer = function (answer) {
         const correctAnswer = images[currentImageIndex].answer;
         guesses[answer]++;
-        localStorage.setItem('guesses', JSON.stringify(guesses)); // Save to local storage
+        localStorage.setItem('guesses', JSON.stringify(guesses));
 
         const correctAnswerElement = document.getElementById('correct-answer');
         correctAnswerElement.textContent = correctAnswer.toUpperCase();
         correctAnswerElement.style.display = 'block';
 
-        setTimeout(showProgressBars, 2000); // Delay to show correct answer on image before displaying progress bars
-    }
+        setTimeout(showProgressBars, 2000);
+    };
 
     loadNextImage();
 });
