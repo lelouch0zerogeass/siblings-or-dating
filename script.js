@@ -25,6 +25,16 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem(imageKey, JSON.stringify(guesses));
     }
 
+    function adjustFontSize(element) {
+        let fontSize = 16; // Start with a default font size
+        element.style.fontSize = fontSize + 'px';
+
+        while (element.scrollWidth > element.clientWidth) {
+            fontSize--;
+            element.style.fontSize = fontSize + 'px';
+        }
+    }
+
     function showProgressBarAndAnswer(imageKey, correctAnswer) {
         const storedGuesses = getStoredGuesses(imageKey);
         const totalGuesses = storedGuesses.siblings + storedGuesses.dating;
@@ -38,11 +48,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const progressBar = document.createElement('div');
         progressBar.classList.add('overlay-bar');
         progressBar.innerHTML = `
-            <div class="bar-segment siblings" style="width: ${siblingsPercentage}%;">Siblings: ${siblingsPercentage}%</div>
-            <div class="bar-segment dating" style="width: ${datingPercentage}%;">Dating: ${datingPercentage}%</div>
+            <div class="bar-segment siblings">Siblings: ${siblingsPercentage}%</div>
+            <div class="bar-segment dating">Dating: ${datingPercentage}%</div>
         `;
 
         correctAnswerElement.after(progressBar);
+
+        const siblingSegment = progressBar.querySelector('.bar-segment.siblings');
+        const datingSegment = progressBar.querySelector('.bar-segment.dating');
+        siblingSegment.style.width = `${siblingsPercentage}%`;
+        datingSegment.style.width = `${datingPercentage}%`;
+
+        adjustFontSize(siblingSegment);
+        adjustFontSize(datingSegment);
 
         const nextButton = document.createElement('button');
         nextButton.textContent = 'Next Image';
