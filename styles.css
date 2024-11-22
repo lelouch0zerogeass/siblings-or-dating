@@ -1,68 +1,86 @@
+/* Universal styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #e3f2fd; /* Lighter blue background */
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f8;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
+    color: #333;
+}
+
+/* Header and footer */
+header, footer {
+    background-color: #007bff;
+    color: white;
     text-align: center;
+    padding: 10px 0;
 }
 
-#title-container {
-    margin-bottom: 20px;
+footer p {
+    margin: 0;
 }
 
-#game-container {
+/* Main content */
+main {
+    flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    width: 100%;
-    max-width: 600px; /* Maximum width for larger screens */
-    padding: 10px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
 
+h1 {
+    font-size: 2.5rem;
+}
+
+/* Game container */
+#game-container {
+    width: 100%;
+    max-width: 600px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Image container */
 .image-container {
     position: relative;
     width: 100%;
 }
 
 img {
-    width: auto;
-    height: 70vh; /* Make it as tall as possible without overflowing */
-    max-width: 100%; /* Ensure it doesn't overflow horizontally */
-    max-height: 100vh; /* Ensure it doesn't overflow vertically */
-    border-radius: 10px;
-    margin: 10px 0;
-    object-fit: contain; /* Ensure image scales properly */
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
 }
 
+/* Overlay text */
 .overlay-text {
     position: absolute;
-    top: 30%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #ff5722; /* Bright color for the correct answer */
-    font-size: 2rem;
+    color: #ff5722;
+    font-size: 1.5rem;
     font-weight: bold;
     display: none;
-    background: rgba(255, 255, 255, 0.8); /* Background for better readability */
+    background: rgba(255, 255, 255, 0.8);
     padding: 10px;
     border-radius: 5px;
 }
 
+/* Overlay bar */
 .overlay-bar {
     position: absolute;
-    bottom: 10%;
-    left: 5%; /* Adjusted to fit within the image */
-    right: 5%; /* Adjusted to fit within the image */
+    bottom: 0;
+    left: 0;
+    right: 0;
     display: flex;
-    width: 90%; /* Ensure it doesn't overflow horizontally */
+    background: rgba(0, 0, 0, 0.6);
 }
 
 .bar-segment {
@@ -71,7 +89,7 @@ img {
     text-align: center;
     color: white;
     font-size: 1rem;
-    overflow: hidden; /* Ensure text doesn't overflow */
+    overflow: hidden;
     white-space: nowrap;
 }
 
@@ -83,23 +101,15 @@ img {
     background-color: #4caf50;
 }
 
-.button-container {
+/* Buttons */
+.button-container, .next-button {
+    width: 100%;
+    padding: 20px;
     display: flex;
     justify-content: space-around;
-    width: 100%;
-    max-width: 600px;
-    margin-top: 10px;
-    flex-wrap: wrap; /* Ensure buttons wrap to fit within the screen */
-}
-
-.next-button {
-    width: 90%; /* Ensure it fits within the screen */
-    max-width: 600px;
-    margin-top: 20px;
 }
 
 button {
-    flex: 1 1 auto;
     padding: 10px 20px;
     margin: 5px;
     background-color: #007bff;
@@ -108,20 +118,14 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    font-size: calc(0.8vw + 0.8vh + 0.8vmin); /* Responsive font size */
+    font-size: 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    min-width: 45%; /* Ensure buttons fit side-by-side on small screens */
 }
 
 button:hover {
     background-color: #0056b3;
 }
 
-p {
-    margin: 5px;
-}
-
-h1, h2 {
-    color: #333;
-    margin-top: 20px;
+button:disabled {
+    background-color: #cccccc;
 }
