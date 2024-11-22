@@ -18,42 +18,22 @@ document.addEventListener('DOMContentLoaded', () => {
     shuffleArray(images);
     let currentImageIndex = parseInt(localStorage.getItem('currentImageIndex')) || 0; // Load from local storage or initialize
 
-    // Display the chart with percentages
-    function showChart() {
+    // Display progress bars with percentages
+    function showProgressBars() {
         const totalGuesses = guesses.siblings + guesses.dating;
         const siblingsPercentage = ((guesses.siblings / totalGuesses) * 100).toFixed(2);
         const datingPercentage = ((guesses.dating / totalGuesses) * 100).toFixed(2);
 
-        const chartContainer = document.createElement('div');
-        chartContainer.id = 'chart-container';
-
-        const chartCanvas = document.createElement('canvas');
-        chartCanvas.id = 'guessChart';
-        chartContainer.appendChild(chartCanvas);
-
-        gameContainer.innerHTML = '';
-        gameContainer.appendChild(chartContainer);
-
-        new Chart(chartCanvas, {
-            type: 'bar',
-            data: {
-                labels: ['Siblings', 'Dating'],
-                datasets: [{
-                    label: 'Percentage of Guesses',
-                    data: [siblingsPercentage, datingPercentage],
-                    backgroundColor: ['#ff5722', '#4caf50'],
-                    borderColor: ['#ff5722', '#4caf50'],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
+        gameContainer.innerHTML = `
+            <div class="progress-bar-container">
+                <div class="progress-bar" style="width: ${siblingsPercentage}%;">
+                    Siblings: ${siblingsPercentage}%
+                </div>
+                <div class="progress-bar dating" style="width: ${datingPercentage}%;">
+                    Dating: ${datingPercentage}%
+                </div>
+            </div>
+        `;
 
         const nextButton = document.createElement('button');
         nextButton.textContent = 'Next Image';
@@ -99,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         correctAnswerElement.textContent = correctAnswer.toUpperCase();
         correctAnswerElement.style.display = 'block';
 
-        setTimeout(showChart, 2000); // Delay to show correct answer on image before displaying chart
+        setTimeout(showProgressBars, 2000); // Delay to show correct answer on image before displaying progress bars
     }
 
     loadNextImage();
