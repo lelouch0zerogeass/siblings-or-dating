@@ -58,11 +58,11 @@ img {
 
 .overlay-bar {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    bottom: 10%;
+    left: 5%; /* Adjusted to fit within the image */
+    right: 5%; /* Adjusted to fit within the image */
     display: flex;
-    width: 100%;
+    width: 90%; /* Ensure it doesn't overflow horizontally */
 }
 
 .bar-segment {
@@ -71,6 +71,9 @@ img {
     text-align: center;
     color: white;
     font-size: 1rem;
+    overflow: hidden; /* Ensure text doesn't overflow */
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .bar-segment.siblings {
@@ -88,6 +91,12 @@ img {
     max-width: 600px;
     margin-top: 10px;
     flex-wrap: wrap; /* Ensure buttons wrap to fit within the screen */
+}
+
+.next-button {
+    width: 90%; /* Ensure it fits within the screen */
+    max-width: 600px;
+    margin-top: 20px;
 }
 
 button {
