@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const gameContainer = document.getElementById('game-container');
     const images = [
-        { src: 'siblings1.png', answer: 'siblings' },
-        { src: 'siblings2.png', answer: 'siblings' },
-        // Add more images here
+        'siblings1.png',
+        'siblings2.png',
+        // Add more images here when they are ready
     ];
 
     // Shuffle images to ensure a random order
@@ -33,6 +33,15 @@ document.addEventListener('DOMContentLoaded', () => {
             fontSize--;
             element.style.fontSize = fontSize + 'px';
         }
+    }
+
+    function getAnswerFromFilename(filename) {
+        if (filename.includes('siblings')) {
+            return 'siblings';
+        } else if (filename.includes('dating')) {
+            return 'dating';
+        }
+        return '';
     }
 
     function showProgressBarAndAnswer(imageKey, correctAnswer) {
@@ -75,10 +84,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadNextImage() {
         if (currentImageIndex < images.length) {
             const image = images[currentImageIndex];
-            const imageKey = image.src.replace('.png', '');
+            const imageKey = image.replace('.png', '');
+            const correctAnswer = getAnswerFromFilename(image);
+
             gameContainer.innerHTML = `
                 <div class="image-container">
-                    <img src="${image.src}" alt="Image">
+                    <img src="${image}" alt="Image">
                     <div class="overlay-text" id="correct-answer"></div>
                 </div>
                 <div class="button-container">
@@ -92,12 +103,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.checkAnswer = function (imageKey, answer) {
-        const correctAnswer = images[currentImageIndex].answer;
+        const correctAnswer = getAnswerFromFilename(images[currentImageIndex]);
         const storedGuesses = getStoredGuesses(imageKey);
         storedGuesses[answer]++;
         storeGuesses(imageKey, storedGuesses);
 
         showProgressBarAndAnswer(imageKey, correctAnswer);
+
+        // Remove the answer buttons and show only the next button
+        document.querySelector('.button-container').innerHTML = '';
     };
 
     loadNextImage();
