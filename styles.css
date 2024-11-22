@@ -29,8 +29,8 @@ main {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     padding: 20px;
     width: 100%;
 }
@@ -52,7 +52,7 @@ h1 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 10px;
+    margin: auto;
 }
 
 #game-container:hover {
@@ -70,7 +70,8 @@ h1 {
 
 img {
     width: auto;
-    max-height: 70vh;
+    height: auto;
+    max-height: 60vh;
     max-width: 100%;
     border-bottom: 1px solid #ddd;
     object-fit: contain;
