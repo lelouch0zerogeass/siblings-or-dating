@@ -25,22 +25,20 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem(imageKey, JSON.stringify(guesses));
     }
 
-    function showProgressBars(imageKey) {
+    function showProgressBar(imageKey) {
         const storedGuesses = getStoredGuesses(imageKey);
         const totalGuesses = storedGuesses.siblings + storedGuesses.dating;
-        const siblingsPercentage = ((storedGuesses.siblings / totalGuesses) * 100).toFixed(2);
-        const datingPercentage = ((storedGuesses.dating / totalGuesses) * 100).toFixed(2);
+        const siblingsPercentage = (totalGuesses === 0) ? 0 : ((storedGuesses.siblings / totalGuesses) * 100).toFixed(2);
+        const datingPercentage = (totalGuesses === 0) ? 0 : ((storedGuesses.dating / totalGuesses) * 100).toFixed(2);
 
-        gameContainer.innerHTML = `
-            <div class="progress-bar-container">
-                <div class="progress-bar" style="width: ${siblingsPercentage}%;">
-                    Siblings: ${siblingsPercentage}%
-                </div>
-                <div class="progress-bar dating" style="width: ${datingPercentage}%;">
-                    Dating: ${datingPercentage}%
-                </div>
-            </div>
+        const progressBar = document.createElement('div');
+        progressBar.classList.add('overlay-bar');
+        progressBar.innerHTML = `
+            <div class="bar-segment siblings" style="width: ${siblingsPercentage}%;">Siblings: ${siblingsPercentage}%</div>
+            <div class="bar-segment dating" style="width: ${datingPercentage}%;">Dating: ${datingPercentage}%</div>
         `;
+
+        gameContainer.appendChild(progressBar);
 
         const nextButton = document.createElement('button');
         nextButton.textContent = 'Next Image';
@@ -80,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         correctAnswerElement.textContent = correctAnswer.toUpperCase();
         correctAnswerElement.style.display = 'block';
 
-        setTimeout(() => showProgressBars(imageKey), 2000);
+        setTimeout(() => showProgressBar(imageKey), 2000);
     };
 
     loadNextImage();
