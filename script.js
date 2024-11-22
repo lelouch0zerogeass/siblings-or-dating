@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const images = [
         'siblings1.png',
         'siblings2.png',
+        'BroemmelSiblings1.png'
         // Add more images here once uploaded
     ];
 
