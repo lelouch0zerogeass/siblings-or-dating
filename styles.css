@@ -73,7 +73,6 @@ img {
     font-size: 1rem;
     overflow: hidden; /* Ensure text doesn't overflow */
     white-space: nowrap;
-    text-overflow: ellipsis;
 }
 
 .bar-segment.siblings {
