@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const images = [
         'siblings1.png',
         'siblings2.png',
-        // Add more images here when they are ready
+        // Add more images here once uploaded
     ];
 
     // Shuffle images to ensure a random order
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const datingPercentage = (totalGuesses === 0) ? 0 : ((storedGuesses.dating / totalGuesses) * 100).toFixed(2);
 
         const correctAnswerElement = document.getElementById('correct-answer');
-        correctAnswerElement.textContent = correctAnswer.toUpperCase();
+        correctAnswerElement.textContent = `${correctAnswer.toUpperCase()} (Based on previous users' guesses)`;
         correctAnswerElement.style.display = 'block';
 
         const progressBar = document.createElement('div');
