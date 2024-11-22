@@ -44,7 +44,7 @@ img {
 
 .overlay-text {
     position: absolute;
-    top: 50%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #ff5722; /* Bright color for the correct answer */
@@ -58,7 +58,7 @@ img {
 
 .overlay-bar {
     position: absolute;
-    bottom: 0;
+    bottom: 10%;
     left: 0;
     right: 0;
     background: rgba(0, 0, 0, 0.6);
@@ -71,7 +71,6 @@ img {
     text-align: center;
     color: white;
     font-size: 1rem;
-    border-radius: 0 0 5px 5px;
 }
 
 .bar-segment.siblings {
