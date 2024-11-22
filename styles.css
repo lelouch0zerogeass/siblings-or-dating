@@ -113,11 +113,11 @@ img {
 }
 
 .bar-segment.siblings {
-    background-color: #ff5722;
+    background-color: #007bff; /* Blue */
 }
 
 .bar-segment.dating {
-    background-color: #4caf50;
+    background-color: #ff5722; /* Orange */
 }
 
 /* Buttons */
