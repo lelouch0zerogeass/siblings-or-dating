@@ -93,12 +93,6 @@ h1, h2 {
     margin-top: 20px;
 }
 
-.percentage {
-    font-size: calc(1vw + 1vh + 1vmin); /* Responsive font size */
-    color: #333;
-    margin-top: 10px;
-}
-
 .progress-bar-container {
     width: 100%;
     max-width: 600px;
