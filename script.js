@@ -126,10 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
 
                 document.querySelectorAll('.answer-button').forEach(button => {
-                    button.addEventListener('click', () => {
-                        console.log(`Button clicked: ${button.getAttribute('data-answer')}`);
-                        checkAnswer(imageKey, button.getAttribute('data-answer'));
-                    });
+                    button.addEventListener('click', handleButtonClick);
                 });
 
                 currentImageIndex++;
@@ -138,6 +135,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentImageIndex++;
             }
         }
+    }
+
+    function handleButtonClick(event) {
+        const button = event.target;
+        const answer = button.getAttribute('data-answer');
+        const imageKey = images[currentImageIndex - 1].replace('.png', '');
+        console.log(`Button clicked: ${button.getAttribute('data-answer')}`);
+        checkAnswer(imageKey, answer);
     }
 
     window.checkAnswer = function (imageKey, answer) {
