@@ -89,8 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const nextButton = document.createElement('button');
         nextButton.textContent = 'Next Image';
         nextButton.classList.add('next-button');
-        nextButton.addEventListener('click', loadNextImage);
-        nextButton.addEventListener('touchstart', loadNextImage); // Handle touch events
+        nextButton.onclick = () => {
+            loadNextImage();
+        };
         gameContainer.appendChild(nextButton);
     }
 
@@ -101,7 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <button id="restart-button">Restart Game</button>
             `;
             document.getElementById('restart-button').addEventListener('click', initializeGame);
-            document.getElementById('restart-button').addEventListener('touchstart', initializeGame); // Handle touch events
             return;
         }
 
@@ -130,10 +130,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         console.log(`Button clicked: ${button.getAttribute('data-answer')}`);
                         checkAnswer(imageKey, button.getAttribute('data-answer'));
                     });
+
+                    // Adding touch event listener
                     button.addEventListener('touchstart', () => {
-                        console.log(`Button clicked: ${button.getAttribute('data-answer')}`);
+                        console.log(`Touch start event for button: ${button.getAttribute('data-answer')}`);
                         checkAnswer(imageKey, button.getAttribute('data-answer'));
-                    }); // Handle touch events
+                    });
                 });
 
                 currentImageIndex++;
