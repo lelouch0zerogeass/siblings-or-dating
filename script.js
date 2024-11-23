@@ -37,11 +37,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getAnswerFromFilename(filename) {
-        if (filename.includes('siblings')) {
+        const lowerCaseFilename = filename.toLowerCase();
+        if (lowerCaseFilename.includes('siblings')) {
+            console.log(`${filename} is identified as SIBLINGS.`);
             return 'siblings';
-        } else if (filename.includes('dating')) {
+        } else if (lowerCaseFilename.includes('dating')) {
+            console.log(`${filename} is identified as DATING.`);
             return 'dating';
         }
+        console.log(`${filename} does not match siblings or dating.`);
         return '';
     }
 
@@ -87,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const image = images[currentImageIndex];
             const imageKey = image.replace('.png', '');
             const correctAnswer = getAnswerFromFilename(image);
+            console.log(`Loading image: ${image}, with key: ${imageKey} and answer: ${correctAnswer}`);
 
             gameContainer.innerHTML = `
                 <div class="image-container">
@@ -101,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             document.querySelectorAll('.answer-button').forEach(button => {
                 button.addEventListener('click', () => {
+                    console.log(`Button clicked: ${button.getAttribute('data-answer')}`);
                     checkAnswer(imageKey, button.getAttribute('data-answer'));
                 });
             });
@@ -110,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.checkAnswer = function (imageKey, answer) {
+        console.log(`Checking answer for imageKey: ${imageKey}, answer: ${answer}`);
         const correctAnswer = getAnswerFromFilename(images[currentImageIndex]);
         const storedGuesses = getStoredGuesses(imageKey);
         storedGuesses[answer]++;
