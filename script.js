@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add more images here once uploaded
     ];
 
-    // Shuffle images to ensure a random order
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -28,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function adjustFontSize(element) {
-        let fontSize = 16; // Start with a default font size
+        let fontSize = 16;
         element.style.fontSize = fontSize + 'px';
 
         while (element.scrollWidth > element.clientWidth) {
@@ -84,12 +83,18 @@ document.addEventListener('DOMContentLoaded', () => {
         nextButton.classList.add('next-button');
         nextButton.onclick = () => {
             currentImageIndex++;
+            if (usedGroups.size >= totalGroups) {
+                usedGroups.clear(); // Reset groups for the next round
+                currentImageIndex = 0; // Restart from the beginning
+                shuffleArray(images); // Shuffle images again for the new round
+            }
             loadNextImage();
         };
         gameContainer.appendChild(nextButton);
     }
 
     function loadNextImage() {
+        const totalGroups = new Set(images.map(img => getGroupFromFilename(img))).size;
         while (currentImageIndex < images.length) {
             const image = images[currentImageIndex];
             const group = getGroupFromFilename(image);
@@ -135,7 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         showProgressBarAndAnswer(imageKey, correctAnswer);
 
-        // Remove the answer buttons and show only the next button
         document.querySelector('.button-container').innerHTML = '';
     };
 
