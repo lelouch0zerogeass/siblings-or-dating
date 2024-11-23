@@ -11,6 +11,7 @@ body {
     line-height: 1.6;
     align-items: center; /* Center content horizontally */
     justify-content: center; /* Center content vertically */
+    text-align: center; /* Ensure text is centered */
 }
 
 /* Header and footer */
@@ -43,6 +44,7 @@ main {
     justify-content: center;
     padding: 20px;
     width: 100%;
+    box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
 }
 
 h1 {
@@ -80,6 +82,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center; /* Center the image */
 }
 
 img {
@@ -140,6 +143,7 @@ img {
     display: flex;
     justify-content: space-around;
     padding: 10px;
+    box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
 }
 
 button {
