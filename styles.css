@@ -12,6 +12,7 @@ body {
     align-items: center; /* Center content horizontally */
     justify-content: center; /* Center content vertically */
     text-align: center; /* Ensure text is centered */
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 /* Header and footer */
