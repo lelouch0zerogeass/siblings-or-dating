@@ -94,10 +94,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="overlay-text" id="correct-answer"></div>
                 </div>
                 <div class="button-container">
-                    <button onclick="checkAnswer('${imageKey}', 'siblings')">Siblings</button>
-                    <button onclick="checkAnswer('${imageKey}', 'dating')">Dating</button>
+                    <button class="answer-button" data-answer="siblings">Siblings</button>
+                    <button class="answer-button" data-answer="dating">Dating</button>
                 </div>
             `;
+
+            document.querySelectorAll('.answer-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    checkAnswer(imageKey, button.getAttribute('data-answer'));
+                });
+            });
         } else {
             gameContainer.innerHTML = '<h2>Game Over! Thanks for playing.</h2>';
         }
