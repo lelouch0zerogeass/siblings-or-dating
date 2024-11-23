@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     shuffleArray(images);
     let currentImageIndex = 0;
     let usedGroups = new Set();
+    const totalGroups = new Set(images.map(img => getGroupFromFilename(img))).size;
 
     function getStoredGuesses(imageKey) {
         return JSON.parse(localStorage.getItem(imageKey)) || { siblings: 0, dating: 0 };
@@ -94,7 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function loadNextImage() {
-        const totalGroups = new Set(images.map(img => getGroupFromFilename(img))).size;
         while (currentImageIndex < images.length) {
             const image = images[currentImageIndex];
             const group = getGroupFromFilename(image);
@@ -122,18 +122,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 });
 
-                currentImageIndex++;
-                return;
-            } else {
-                currentImageIndex++;
+                return; // Ensure we exit the loop after loading the image
             }
+            currentImageIndex++;
         }
+
         gameContainer.innerHTML = '<h2>Game Over! Thanks for playing.</h2>';
     }
 
     window.checkAnswer = function (imageKey, answer) {
         console.log(`Checking answer for imageKey: ${imageKey}, answer: ${answer}`);
-        const correctAnswer = getAnswerFromFilename(images[currentImageIndex - 1]);
+        const correctAnswer = getAnswerFromFilename(images[currentImageIndex]);
         const storedGuesses = getStoredGuesses(imageKey);
         storedGuesses[answer]++;
         storeGuesses(imageKey, storedGuesses);
