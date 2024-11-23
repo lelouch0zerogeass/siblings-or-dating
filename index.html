@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Siblings or Dating</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Lazy Load Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/17.3.1/lazyload.min.js" defer></script>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -49,6 +51,19 @@
         #game-container:hover {
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
         }
+
+        /* Media queries for responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            main {
+                padding: 10px;
+            }
+            #game-container {
+                max-width: 90%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -57,10 +72,15 @@
     </header>
     <main id="game-container">
         <!-- Game content will be dynamically inserted here -->
+        <img class="lazy" data-src="path/to/image.jpg" alt="Description"> <!-- Example image with lazy loading -->
     </main>
     <footer>
         <p>&copy; 2024 Siblings or Dating. All rights reserved.</p>
     </footer>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
+    <script>
+        // Initialize lazy load
+        var lazyLoadInstance = new LazyLoad();
+    </script>
 </body>
 </html>
