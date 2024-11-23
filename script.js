@@ -98,6 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     <button onclick="checkAnswer('${imageKey}', 'dating')">Dating</button>
                 </div>
             `;
+
+            // Initialize lazy loading for the new image
+            new LazyLoad({
+                elements_selector: '.lazy'
+            });
         } else {
             gameContainer.innerHTML = '<h2>Game Over! Thanks for playing.</h2>';
         }
@@ -116,6 +121,4 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     loadNextImage();
-    // Initialize lazy load
-    var lazyLoadInstance = new LazyLoad();
 });
