@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             gameContainer.innerHTML = `
                 <div class="image-container">
-                    <img class="lazy" data-src="${image}" alt="Image"> <!-- Added lazy loading -->
+                    <img class="lazy" data-src="${image}" alt="Image">
                     <div class="overlay-text" id="correct-answer"></div>
                 </div>
                 <div class="button-container">
@@ -116,4 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     loadNextImage();
+    // Initialize lazy load
+    var lazyLoadInstance = new LazyLoad();
 });
