@@ -130,12 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         console.log(`Button clicked: ${button.getAttribute('data-answer')}`);
                         checkAnswer(imageKey, button.getAttribute('data-answer'));
                     });
-
-                    // Adding touch event listener
-                    button.addEventListener('touchstart', () => {
-                        console.log(`Touch start event for button: ${button.getAttribute('data-answer')}`);
-                        checkAnswer(imageKey, button.getAttribute('data-answer'));
-                    });
                 });
 
                 currentImageIndex++;
