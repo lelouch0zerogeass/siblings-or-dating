@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     shuffleArray(images);
     let currentImageIndex = 0;
+    let usedGroups = new Set();
 
     function getStoredGuesses(imageKey) {
         return JSON.parse(localStorage.getItem(imageKey)) || { siblings: 0, dating: 0 };
@@ -39,14 +40,16 @@ document.addEventListener('DOMContentLoaded', () => {
     function getAnswerFromFilename(filename) {
         const lowerCaseFilename = filename.toLowerCase();
         if (lowerCaseFilename.includes('siblings')) {
-            console.log(`${filename} is identified as SIBLINGS.`);
             return 'siblings';
         } else if (lowerCaseFilename.includes('dating')) {
-            console.log(`${filename} is identified as DATING.`);
             return 'dating';
         }
-        console.log(`${filename} does not match siblings or dating.`);
         return '';
+    }
+
+    function getGroupFromFilename(filename) {
+        const match = filename.match(/([a-zA-Z]+)(Siblings|Dating)\d+/);
+        return match ? match[1] : '';
     }
 
     function showProgressBarAndAnswer(imageKey, correctAnswer) {
@@ -87,37 +90,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function loadNextImage() {
-        if (currentImageIndex < images.length) {
+        while (currentImageIndex < images.length) {
             const image = images[currentImageIndex];
-            const imageKey = image.replace('.png', '');
-            const correctAnswer = getAnswerFromFilename(image);
-            console.log(`Loading image: ${image}, with key: ${imageKey} and answer: ${correctAnswer}`);
+            const group = getGroupFromFilename(image);
+            if (!usedGroups.has(group)) {
+                usedGroups.add(group);
+                const imageKey = image.replace('.png', '');
+                const correctAnswer = getAnswerFromFilename(image);
+                console.log(`Loading image: ${image}, with key: ${imageKey} and answer: ${correctAnswer}`);
 
-            gameContainer.innerHTML = `
-                <div class="image-container">
-                    <img src="${image}" alt="Image">
-                    <div class="overlay-text" id="correct-answer"></div>
-                </div>
-                <div class="button-container">
-                    <button class="answer-button" data-answer="siblings">Siblings</button>
-                    <button class="answer-button" data-answer="dating">Dating</button>
-                </div>
-            `;
+                gameContainer.innerHTML = `
+                    <div class="image-container">
+                        <img src="${image}" alt="Image">
+                        <div class="overlay-text" id="correct-answer"></div>
+                    </div>
+                    <div class="button-container">
+                        <button class="answer-button" data-answer="siblings">Siblings</button>
+                        <button class="answer-button" data-answer="dating">Dating</button>
+                    </div>
+                `;
 
-            document.querySelectorAll('.answer-button').forEach(button => {
-                button.addEventListener('click', () => {
-                    console.log(`Button clicked: ${button.getAttribute('data-answer')}`);
-                    checkAnswer(imageKey, button.getAttribute('data-answer'));
+                document.querySelectorAll('.answer-button').forEach(button => {
+                    button.addEventListener('click', () => {
+                        console.log(`Button clicked: ${button.getAttribute('data-answer')}`);
+                        checkAnswer(imageKey, button.getAttribute('data-answer'));
+                    });
                 });
-            });
-        } else {
-            gameContainer.innerHTML = '<h2>Game Over! Thanks for playing.</h2>';
+
+                currentImageIndex++;
+                return;
+            } else {
+                currentImageIndex++;
+            }
         }
+        gameContainer.innerHTML = '<h2>Game Over! Thanks for playing.</h2>';
     }
 
     window.checkAnswer = function (imageKey, answer) {
         console.log(`Checking answer for imageKey: ${imageKey}, answer: ${answer}`);
-        const correctAnswer = getAnswerFromFilename(images[currentImageIndex]);
+        const correctAnswer = getAnswerFromFilename(images[currentImageIndex - 1]);
         const storedGuesses = getStoredGuesses(imageKey);
         storedGuesses[answer]++;
         storeGuesses(imageKey, storedGuesses);
