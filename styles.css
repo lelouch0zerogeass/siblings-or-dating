@@ -80,7 +80,7 @@ h1 {
     align-items: center;
 }
 
-img {
+img.lazy {
     width: auto;
     height: auto;
     max-height: 60vh;
@@ -160,4 +160,17 @@ button:hover {
 
 button:disabled {
     background-color: #cccccc;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+    main {
+        padding: 10px;
+    }
+    #game-container {
+        max-width: 90%;
+    }
 }
