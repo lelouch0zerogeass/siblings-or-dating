@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const gameContainer = document.getElementById('game-container');
     const images = [
-        'siblings1.png',
-        'siblings2.png',
+        'HoganSiblings1.png',
+        'TomlinsonSiblings1.png',
         'BroemmelSiblings1.png'
         // Add more images here once uploaded
     ];
