@@ -9,6 +9,8 @@ body {
     min-height: 100vh;
     color: #333;
     line-height: 1.6;
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
 }
 
 /* Header and footer */
@@ -62,8 +64,8 @@ h1 {
     transition: box-shadow 0.3s ease-in-out;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
     margin: auto;
 }
 
@@ -160,4 +162,17 @@ button:hover {
 
 button:disabled {
     background-color: #cccccc;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+    main {
+        padding: 10px;
+    }
+    #game-container {
+        max-width: 90%;
+    }
 }
