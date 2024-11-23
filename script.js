@@ -14,6 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function initializeGame() {
+        shuffleArray(images);
+        currentImageIndex = 0;
+        usedGroups.clear();
+        loadNextImage();
+    }
+
     shuffleArray(images);
     let currentImageIndex = 0;
     let usedGroups = new Set();
@@ -83,18 +90,21 @@ document.addEventListener('DOMContentLoaded', () => {
         nextButton.textContent = 'Next Image';
         nextButton.classList.add('next-button');
         nextButton.onclick = () => {
-            currentImageIndex++;
-            if (usedGroups.size >= totalGroups) {
-                usedGroups.clear(); // Reset groups for the next round
-                currentImageIndex = 0; // Restart from the beginning
-                shuffleArray(images); // Shuffle images again for the new round
-            }
             loadNextImage();
         };
         gameContainer.appendChild(nextButton);
     }
 
     function loadNextImage() {
+        if (usedGroups.size >= totalGroups) {
+            gameContainer.innerHTML = `
+                <h2>Game Over! Thanks for playing.</h2>
+                <button id="restart-button">Restart Game</button>
+            `;
+            document.getElementById('restart-button').addEventListener('click', initializeGame);
+            return;
+        }
+
         while (currentImageIndex < images.length) {
             const image = images[currentImageIndex];
             const group = getGroupFromFilename(image);
@@ -122,17 +132,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 });
 
-                return; // Ensure we exit the loop after loading the image
+                currentImageIndex++;
+                return;
+            } else {
+                currentImageIndex++;
             }
-            currentImageIndex++;
         }
-
-        gameContainer.innerHTML = '<h2>Game Over! Thanks for playing.</h2>';
     }
 
     window.checkAnswer = function (imageKey, answer) {
         console.log(`Checking answer for imageKey: ${imageKey}, answer: ${answer}`);
-        const correctAnswer = getAnswerFromFilename(images[currentImageIndex]);
+        const correctAnswer = getAnswerFromFilename(images[currentImageIndex - 1]);
         const storedGuesses = getStoredGuesses(imageKey);
         storedGuesses[answer]++;
         storeGuesses(imageKey, storedGuesses);
@@ -142,5 +152,5 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.button-container').innerHTML = '';
     };
 
-    loadNextImage();
+    initializeGame(); // Start the game when the page loads
 });
